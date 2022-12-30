@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>City</title>
+</head>
+
+<body>
+	<header class="header">
+		<div class="header__panel1">
+		</div>
+		<div class="header__panel2">
+			<div class="header__container">
+				<a href="index.html" class="logotype">
+					<img src="img/logo.svg" alt="City" class="header__logo">
+				</a>
+			</div>
+		</div>
+		<div class="header__panel3">
+			<h2 class="header__slogan">Welcome to<br>Business Analytics Online</h2>
+		</div>
+	</header>
+	<main class="main">
+		<form action=todo.html class="form" id="form">
+			<label for="name" class="form__label">Name</label>
+			<input type="text" class="form__input" name="name" id="name">
+			<label for="password" class="form__label">Password</label>
+			<input type="password" class="form__input" name="password" id="password">
+			<input type="submit" class="form__submit" value="LOGIN">
+			<a href="#" class="form__forgot" id="message">Forgot Password</a>
+			<a href="#" class="form__register">Register now</a>
+		</form>
+		<div class="main__column">
+			<p class="main__description"><span class="main__head">Business Analytics</span> — a new, convenient tool for
+				managing and forecasting your business performance, which will help analyze your own
+				finances and cash flows, visualize your reporting, business processes, KPI's</p>
+			<ul class="main__list">
+				<li class="main__item">
+					<h3 class="main__heading">Interactive Reporting</h3>
+					<p class="main__text">In just a few clicks, you can connect your data from 1C, CRM (Bitrix24, AmoCRM,
+						ZohoCRM), <br>E-commerce (PROM.UA, Rozetka,
+						ebay), Logistic (Nova Poshta), Google Analytics and many more systems that reflect different
+						aspects
+						of
+						business
+						activities.</p>
+				</li>
+				<li class="main__item">
+					<h3 class="main__heading">Automated data updates</h3>
+					<p class="main__text">The application automatically updates and structures the data in just 60
+						seconds,
+						saving you time and money.</p>
+				<li class="main__item">
+					<h3 class="main__heading">Data Security</h3>
+					<p class="main__text">The Bank guarantees the safety of your personal data, ensuring their integrity
+						and
+						confidentiality.</p>
+			</ul>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="footer__container">
+			<nav class="footer__menu">
+				<a href="#" class="footer__item">Terms & Conditions</a>
+				<a href="#" class="footer__item">Privacy</a>
+				<a href="#" class="footer__item">Notice at Collection</a>
+				<a href="#" class="footer__item">CA Privacy Hub</a>
+				<a href="#" class="footer__item">Contact Us</a>
+				<a href="#" class="footer__item">Sitemap</a>
+			</nav>
+			<a href="index.html" class="footer__link"><img src="img/logo.svg" alt="City" class="footer__logo"></a>
+			<hr class="footer__line">
+			<p class="footer__copyright">Copyright © 2020 Citigroup Inc. Citibank, N.A. Member FDIC. Equal Opportunity
+				Lender.
+			</p>
+		</div>
+	</footer>
+	<script>
+		const form = document.getElementById('form');
+		let name = document.getElementById('name');
+		let pass = document.getElementById('password');
+		let errorMessage = document.getElementById('message');
+		form.onsubmit = function () {
+			if (name.value === 'Admin' && password.value === '12345') {
+			} else {
+				event.preventDefault();
+				errorMessage.classList.add('error-message');
+			}
+
+		}
+		const formFields = form.elements;
+		const submitButton = form.querySelector('[type="submit"]');
+
+		function changeHandler() {
+			for (let i = 0; i < formFields.length; i++) {
+				if (formFields[i].type !== 'submit') {
+					localStorage.setItem(this.name, this.value);
+					errorMessage.classList.remove('error-message');
+				}
+			}
+		}
+		function checkStorage() {
+			for (let i = 0; i < formFields.length; i++) {
+				if (formFields[i].type !== 'submit') {
+					formFields[i].value = localStorage.getItem(formFields[i].name);
+				}
+			}
+			attachEvents();
+		}
+		function attachEvents() {
+			for (let i = 0; i < formFields.length; i++) {
+				formFields[i].addEventListener('change', changeHandler);
+			}
+		}
+		checkStorage();
+	</script>
+</body>
+
+</html>
