@@ -79,18 +79,17 @@
 			</p>
 		</div>
 	</footer>
+	<!-- ||||||||||||||||||| LocalStorage |||||||||||||||||||||||||||||||||||| -->
 	<script>
 		const form = document.getElementById('form');
 		let name = document.getElementById('name');
 		let pass = document.getElementById('password');
 		let errorMessage = document.getElementById('message');
 		form.onsubmit = function () {
-			if (name.value === 'Admin' && password.value === '12345') {
-			} else {
+			if (!(name.value === 'Admin' && password.value === '12345')) {
 				event.preventDefault();
 				errorMessage.classList.add('error-message');
 			}
-
 		}
 		const formFields = form.elements;
 		const submitButton = form.querySelector('[type="submit"]');
