@@ -460,7 +460,10 @@ body {
 	height: 660px;
 	margin-top: -547px;
 	margin-left: 25px;
-	background: #FFFFFF;
+	background-color: #FFFFFF;
+	/* opacity: 0.8; */
+	background-size: 20px 20px;
+	background-image: repeating-linear-gradient(0deg, #444cf7, #444cf7 1px, #e5e5f7 1px, #e5e5f7);
 }
 
 .prime__message {
@@ -541,4 +544,152 @@ body {
 	.prime__message {
 		font-size: 30px;
 	}
+}
+
+/* |||||||||||||||||||||||||||||ToDo script style|||||||||||||||||||||||||||||||||||| */
+:root {
+	--dark: #374152;
+	--darker: #48b3e4;
+	--darkest: #111828;
+	--gray: #6b7279;
+	--light: #eee;
+	--pink: #ee68a9;
+	--purple: #8b5cf6;
+}
+
+.prime__list {
+	flex-direction: column;
+	/* background: var(--dark); */
+	color: var(--light);
+}
+
+header {
+	padding: 2rem 1rem;
+	min-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+header h1 {
+	font-size: 2.5rem;
+	font-weight: 300;
+	color: var(--gray);
+	margin-bottom: 1rem;
+}
+
+#task-form {
+	display: flex;
+}
+
+input,
+button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+#task-input {
+	flex: 1 1 0%;
+	background-color: var(--darker);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	color: var(--light);
+	font-size: 1.25rem;
+}
+
+#task-input::placeholder {
+	color: var(--darkest);
+}
+
+#task-submit {
+	color: var(--pink);
+	font-size: 1.25rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: .4s;
+	background: rgb(58, 40, 40);
+	border-radius: 1rem;
+	padding: 1rem;
+}
+
+#task-submit:hover {
+	opacity: 0.7;
+}
+
+#task-submit:active {
+	opacity: 0.5;
+}
+
+main {
+	flex: 1 1 0%;
+	min-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.task-list {
+	padding: 1rem;
+}
+
+.task-list h2 {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--darkest);
+	margin-bottom: 1rem;
+}
+
+#tasks .task {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--darker);
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+}
+
+#tasks .task .content {
+	flex: 1 1 0%;
+	display: flex;
+}
+
+#tasks .task .content .text {
+	color: var(--darkest);
+	font-size: 1.3rem;
+	width: 100%;
+	display: block;
+	transition: 0.4s;
+}
+
+#tasks .task .content .text:not(:read-only) {
+	color: var(--pink);
+}
+
+#tasks .task .actions button {
+	cursor: pointer;
+	margin: 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: 0.4s;
+	background: rgb(58, 40, 40);
+	border-radius: 1rem;
+	padding: 0.75rem;
+}
+
+#tasks .task .actions button:hover {
+	opacity: 0.7;
+}
+
+#tasks .task .actions button:active {
+	opacity: 0.5;
+}
+
+.task .actions .edit {
+	color: var(--pink);
+}
+
+.task .actions .delete {
+	color: red;
 }

@@ -18,12 +18,96 @@
 	<section class="prime">
 		<div class="prime__list">
 			<p class="prime__message" id="toDo">Thank you <span id="input-name">${name}!</span></p>
+			<header>
+				<form id="task-form">
+					<input type="text" id="task-input" placeholder="What do you have planned?">
+					<input type="submit" value="Add Task" id="task-submit">
+				</form>
+			</header>
+			<main>
+				<section class="task-list">
+					<h2>My Tasks</h2>
+					<div id="tasks">
+						<!-- <div class="task">
+										<div class="content">
+											<input type="text" class="text" value="My shiny task" readonly>
+										</div>
+										<div class="actions">
+											<button class="edit">Edit</button>
+											<button class="delete">Delete</button>
+										</div> -->
+					</div>
 		</div>
+	</section>
+	</main>
+	</div>
+
 	</section>
 </body>
 <script>
 	let inputName = document.getElementById('input-name');
 	inputName.innerHTML = localStorage.getItem('name');
+
+</script>
+<script>
+	window.addEventListener('load', () => {
+		const form = document.getElementById('task-form');
+		const input = document.getElementById('task-input');
+		const tasks = document.getElementById('tasks');
+
+		form.addEventListener('submit', e => {
+			e.preventDefault(); //stop refreshing the page on submit
+			if (!input.value) {
+				alert("Please fill out a task");
+				return;
+			}
+			const task = document.createElement('div');
+			task.classList.add('task');
+			tasks.append(task);
+			const content = document.createElement('div');
+			content.classList.add('content');
+			task.append(content);
+			const text = document.createElement('input');
+			text.classList.add('text');
+			text.type = 'text';
+			text.value = input.value;
+			text.setAttribute('readonly', 'readonly');
+			content.append(text);
+			const actions = document.createElement('div');
+			actions.classList.add('actions');
+			task.append(actions);
+			const edit = document.createElement('button');
+			edit.classList.add('edit');
+			edit.innerHTML = 'Edit';
+			actions.append(edit);
+			const delet = document.createElement('button');
+			delet.classList.add('delete');
+			delet.innerHTML = 'Delete';
+			actions.append(delet);
+			input.value = '';
+
+			edit.addEventListener('click', () => {
+				if (edit.innerText.toLowerCase() == 'edit') {
+					text.removeAttribute('readonly');
+					text.focus();
+					edit.innerText = 'Save';
+				} else {
+					text.setAttribute('readonly', 'readonly');
+					edit.innerText = 'Edit';
+				}
+
+
+			});
+			// tasks.addEventListener('click', e => {
+			// 	if (e.target.tagName == 'BUTTON' && e.target.innerHTML.toLowerCase() == 'delete') {
+			// 		e.target.parentElement.parentElement.remove();
+			// 	}
+			// });
+			delet.addEventListener('click', () => {
+				tasks.removeChild(task);
+			});
+		});
+	});
 </script>
 
 </html>
