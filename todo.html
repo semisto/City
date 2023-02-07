@@ -5,44 +5,46 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>To Do List</title>
 </head>
 
 <body class="container">
-	<header class="head">
-		<a href="todo.html" class="head__link">
-			<img src="img/logo.svg" alt="City" class="head__logo">
-		</a>
-	</header>
-	<section class="prime">
-		<div class="prime__list">
-			<p class="prime__message" id="toDo">Thank you <span id="input-name">${name}!</span></p>
-			<header>
-				<form id="task-form">
-					<input type="text" id="task-input" placeholder="What do you have planned?">
-					<input type="submit" value="Add Task" id="task-submit">
-				</form>
-			</header>
-			<main>
-				<section class="task-list">
-					<h2>My Tasks</h2>
-					<div id="tasks">
-						<!-- <div class="task">
-										<div class="content">
-											<input type="text" class="text" value="My shiny task" readonly>
-										</div>
-										<div class="actions">
-											<button class="edit">Edit</button>
-											<button class="delete">Delete</button>
-										</div> -->
-					</div>
+	<section class="head">
+		<div class="head__container">
+			<a href="todo.html" class="head__link">
+				<img src="img/logo.svg" alt="City" class="head__logo">
+			</a>
+			<section class="prime">
+				<div class="prime__list">
+					<p class="prime__message" id="toDo">Thank you <span id="input-name">${name}!</span></p>
+					<header>
+						<form id="task-form">
+							<input type="text" id="task-input" placeholder="What do you have planned?">
+							<input type="submit" value="Add Task" id="task-submit">
+						</form>
+					</header>
+					<main>
+						<section class="task-list">
+							<h2>My Tasks</h2>
+							<div id="tasks">
+								<!-- Tasks would be here -->
+							</div>
+						</section>
+					</main>
+				</div>
+			</section>
 		</div>
 	</section>
-	</main>
-	</div>
 
-	</section>
+	<!-- <div class="task">
+		<div class="content">
+			<input type="text" class="text" value="My shiny task" readonly>
+		</div>
+		<div class="actions">
+			<button class="edit">Edit</button>
+			<button class="delete">Delete</button>
+	</div> -->
 </body>
 <script>
 	let inputName = document.getElementById('input-name');
@@ -67,12 +69,15 @@
 			const content = document.createElement('div');
 			content.classList.add('content');
 			task.append(content);
-			const text = document.createElement('input');
+			const text = document.createElement('div');
 			text.classList.add('text');
 			text.type = 'text';
-			text.value = input.value;
-			text.setAttribute('readonly', 'readonly');
+			// text.value = input.value;
+			// text.setAttribute('readonly', 'readonly');
+			text.innerHTML = input.value;
+			// text.setAttribute('contentEditable', false);
 			content.append(text);
+			// text.style.height = (text.scrollHeight) + 'px';
 			const actions = document.createElement('div');
 			actions.classList.add('actions');
 			task.append(actions);
@@ -88,11 +93,11 @@
 
 			edit.addEventListener('click', () => {
 				if (edit.innerText.toLowerCase() == 'edit') {
-					text.removeAttribute('readonly');
+					text.setAttribute('contentEditable', true);
 					text.focus();
 					edit.innerText = 'Save';
 				} else {
-					text.setAttribute('readonly', 'readonly');
+					text.setAttribute('contentEditable', false);
 					edit.innerText = 'Edit';
 				}
 
