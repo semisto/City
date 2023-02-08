@@ -443,7 +443,7 @@ body {
 
 .head__link {
 	width: 188px;
-	margin-top: 36px;
+	margin-top: 66px;
 }
 
 @media (max-width: 1201px) {
@@ -540,6 +540,7 @@ body {
 	line-height: 156.69%;
 	text-align: center;
 	color: #333333;
+	background: #eee;
 }
 
 @media (max-width:1201px) {
@@ -688,6 +689,8 @@ main {
 	font-weight: 700;
 	color: var(--darkest);
 	margin-bottom: 1rem;
+	background: #eee;
+	border-radius: 1rem;
 }
 
 @media (max-width:1201px) {
@@ -699,6 +702,7 @@ main {
 @media(max-width:769px) {
 	.task-list h2 {
 		font-size: 1.5rem;
+		text-align: center;
 	}
 }
 
@@ -723,6 +727,13 @@ main {
 	margin-bottom: 1rem;
 }
 
+@media (max-width: 769px) {
+	#tasks .task {
+		position: relative;
+		margin-top: 60px;
+	}
+}
+
 #tasks .task .content {
 	flex: 1 1 0;
 	display: flex;
@@ -741,10 +752,22 @@ main {
 
 }
 
-
+@media (max-width: 769px) {
+	#tasks .task .content .text {
+		padding-top: 0;
+	}
+}
 
 #tasks .task .content .text:read-write {
 	color: var(--pink);
+}
+
+@media (max-width: 769px) {
+	.actions {
+		position: absolute;
+		top: -42px;
+		left: 123px;
+	}
 }
 
 #tasks .task .actions button {
