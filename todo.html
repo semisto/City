@@ -27,9 +27,7 @@
 					<main class="task-holder">
 						<section class="task-list">
 							<h2 class="task-heading">My Tasks</h2>
-							<div id="tasks">
-								<!-- Tasks would be here -->
-							</div>
+							<div id="tasks"></div>
 						</section>
 					</main>
 				</div>
@@ -47,72 +45,83 @@
 	</div> -->
 </body>
 <script>
-	let inputName = document.getElementById('input-name');
-	inputName.innerHTML = localStorage.getItem('name');
+	(function runTodo() {
+		//setting name from index page to the todo page title
+		let inputName = document.getElementById('input-name');
+		inputName.innerHTML = localStorage.getItem('name');
+		//declaring all needed elements for todo logic
+		const form = findForm();
+		const input = findTaskInput();
+		const tasks = findTasks();
+		//setting submit listeners and creating dynamic elements
+		bindEventListeners(form, input, tasks);
+		//restoring previous tasks if they stored
+		restorePreviousElements(tasks);
 
-</script>
-<script>
-	window.addEventListener('load', () => {
-		const form = document.getElementById('task-form');
-		const input = document.getElementById('task-input');
-		const tasks = document.getElementById('tasks');
-
-		form.addEventListener('submit', e => {
-			e.preventDefault(); //stop refreshing the page on submit
-			if (!input.value) {
-				alert("Please fill out a task");
-				return;
-			}
-			const task = document.createElement('div');
-			task.classList.add('task');
-			tasks.append(task);
-			const content = document.createElement('div');
-			content.classList.add('content');
-			task.append(content);
-			const text = document.createElement('div');
-			text.classList.add('text');
-			text.type = 'text';
-			// text.value = input.value;
-			// text.setAttribute('readonly', 'readonly');
-			text.innerHTML = input.value;
-			// text.setAttribute('contentEditable', false);
-			content.append(text);
-			// text.style.height = (text.scrollHeight) + 'px';
-			const actions = document.createElement('div');
-			actions.classList.add('actions');
-			task.append(actions);
-			const edit = document.createElement('button');
-			edit.classList.add('edit');
-			edit.innerHTML = 'Edit';
-			actions.append(edit);
-			const delet = document.createElement('button');
-			delet.classList.add('delete');
-			delet.innerHTML = 'Delete';
-			actions.append(delet);
-			input.value = '';
-
-			edit.addEventListener('click', () => {
-				if (edit.innerText.toLowerCase() == 'edit') {
-					text.setAttribute('contentEditable', true);
-					text.focus();
-					edit.innerText = 'Save';
-				} else {
-					text.setAttribute('contentEditable', false);
-					edit.innerText = 'Edit';
+		function findForm() {
+			return document.getElementById('task-form');
+		}
+		function findTaskInput() {
+			return document.getElementById('task-input');;
+		}
+		function findTasks() {
+			return document.getElementById('tasks');
+		}
+		function bindEventListeners(form, input, tasks) {
+			form.addEventListener('submit', e => {
+				e.preventDefault(); //stop refreshing the page on submit
+				if (!input.value) {
+					alert("Please fill out a task");
+					return;
 				}
-
-
+				//creating elements on submit
+				const task = document.createElement('div');
+				task.classList.add('task');
+				tasks.append(task);
+				const content = document.createElement('div');
+				content.classList.add('content');
+				task.append(content);
+				const text = document.createElement('div');
+				text.classList.add('text');
+				text.type = 'text';
+				text.innerHTML = input.value;
+				content.append(text);
+				const actions = document.createElement('div');
+				actions.classList.add('actions');
+				task.append(actions);
+				const edit = document.createElement('button');
+				edit.classList.add('edit');
+				edit.innerHTML = 'Edit';
+				actions.append(edit);
+				const delet = document.createElement('button');
+				delet.classList.add('delete');
+				delet.innerHTML = 'Delete';
+				actions.append(delet);
+				input.value = '';
+				//writing HTML to localStorage
+				localStorage.setItem('elements', JSON.stringify(tasks.innerHTML));
 			});
-			// tasks.addEventListener('click', e => {
-			// 	if (e.target.tagName == 'BUTTON' && e.target.innerHTML.toLowerCase() == 'delete') {
-			// 		e.target.parentElement.parentElement.remove();
-			// 	}
-			// });
-			delet.addEventListener('click', () => {
-				tasks.removeChild(task);
-			});
+		}
+		function restorePreviousElements(tasks) {
+			if (localStorage.getItem('elements')) tasks.innerHTML = JSON.parse(localStorage.getItem('elements'));
+		}
+		// setting listener for edit and delete buttons
+		tasks.addEventListener('click', (e) => {
+			if (e.target.innerHTML == 'Delete') e.target.parentElement.parentElement.remove();
+			if (e.target.innerHTML == 'Edit') {
+				console.log('rrr');
+				e.target.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute('contenteditable', true);
+				console.log(e.target.parentElement.previousElementSibling.firstElementChild === e.target.parentElement.parentElement.firstElementChild.firstElementChild);
+				e.target.parentElement.parentElement.firstElementChild.firstElementChild.focus();
+				e.target.innerText = 'Save';
+			} else if (e.target.innerHTML == 'Save') {
+				e.target.parentElement.previousElementSibling.firstElementChild.setAttribute('contenteditable', false);
+				e.target.innerText = 'Edit';
+			}
+			//writing HTML to localStorage
+			localStorage.setItem('elements', JSON.stringify(tasks.innerHTML));
 		});
-	});
+	})();
 </script>
 
 </html>
